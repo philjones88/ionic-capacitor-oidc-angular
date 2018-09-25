@@ -10,6 +10,12 @@
   "projects": {
     "ionic-capacitor-oidc-angular": {
       "tags": []
+    },
+    "libs": {
+      "tags": []
+    },
+    "xplat": {
+      "tags": []
     }
   }
 }

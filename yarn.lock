@@ -248,6 +248,10 @@
     yargs "^11.0.0"
     yargs-parser "10.0.0"
 
+"@nstudio/schematics@^6.2.7":
+  version "6.2.7"
+  resolved "https://registry.yarnpkg.com/@nstudio/schematics/-/schematics-6.2.7.tgz#dce13aeba62b3253f5c63196cf7a1c6816f08506"
+
 "@openid/appauth@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@openid/appauth/-/appauth-1.1.1.tgz#7916b9d811b9a1825a7a058d0ab0a3f7a1bdf5a6"

@@ -18,6 +18,15 @@
     "paths": {
       "@ionic-capacitor-oidc-angular/ionic-capacitor-oidc-angular": [
         "libs/ionic-capacitor-oidc-angular/src/index.ts"
+      ],
+      "@ionic-capacitor-oidc-angular/*": [
+        "libs/*"
+      ],
+      "@ionic-capacitor-oidc-angular/ionic": [
+        "xplat/ionic/index.ts"
+      ],
+      "@ionic-capacitor-oidc-angular/ionic/*": [
+        "xplat/ionic/*"
       ]
     }
   },

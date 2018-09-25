@@ -23,7 +23,8 @@
     "update:check": "ng update",
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "dep-graph": "./node_modules/.bin/nx dep-graph",
-    "help": "./node_modules/.bin/nx help"
+    "help": "./node_modules/.bin/nx help",
+    "clean.shared": "cd libs/ && git clean -dfX && cd ../xplat/ && git clean -dfX"
   },
   "private": true,
   "dependencies": {
@@ -43,7 +44,18 @@
     "angularx-logger": "^3.0.0",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "@ngx-translate/core": "~10.0.1",
+    "@ngx-translate/http-loader": "~3.0.1",
+    "@ionic-capacitor-oidc-angular/scss": "file:libs/scss",
+    "reflect-metadata": "^0.1.12",
+    "@ionic-native/core": "^5.0.0-beta.15",
+    "@ionic-native/splash-screen": "^5.0.0-beta.14",
+    "@ionic-native/status-bar": "^5.0.0-beta.14",
+    "@ionic/angular": "^4.0.0-beta.3",
+    "@ionic/ng-toolkit": "~1.0.0",
+    "@ionic/schematics-angular": "~1.0.0",
+    "@ionic-capacitor-oidc-angular/web": "file:xplat/web"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",
@@ -53,6 +65,7 @@
     "@angular/language-service": "^6.1.0",
     "@ngrx/store-devtools": "6.0.1",
     "@nrwl/schematics": "6.3.1",
+    "@nstudio/schematics": "^6.2.7",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
@@ -74,5 +87,8 @@
     "tslib": "^1.9.0",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2"
+  },
+  "xplat": {
+    "prefix": "foo"
   }
 }
