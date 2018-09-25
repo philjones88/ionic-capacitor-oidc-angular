@@ -98,6 +98,17 @@
           }
         }
       }
+    },
+    "ionic-sample": {
+      "root": "apps/ionic-sample/",
+      "sourceRoot": "apps/ionic-sample/src",
+      "projectType": "application",
+      "prefix": "foo",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -16,6 +16,9 @@
     },
     "xplat": {
       "tags": []
+    },
+    "ionic-sample": {
+      "tags": []
     }
   }
 }

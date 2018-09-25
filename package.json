@@ -24,7 +24,17 @@
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "help": "./node_modules/.bin/nx help",
-    "clean.shared": "cd libs/ && git clean -dfX && cd ../xplat/ && git clean -dfX"
+    "clean.shared": "cd libs/ && git clean -dfX && cd ../xplat/ && git clean -dfX",
+    "clean": "npx rimraf -- hooks node_modules package-lock.json && npm i",
+    "build.ionic.sample": "cd apps/ionic-sample && npm run build:web",
+    "prepare.ionic.sample": "npm run clean && npm run clean.ionic.sample && npm run build.ionic.sample",
+    "prepare.ionic.sample.ios": "npm run prepare.ionic.sample && cd apps/ionic-sample && npm run cap.add.ios",
+    "prepare.ionic.sample.android": "npm run prepare.ionic.sample && cd apps/ionic-sample && npm run cap.add.android",
+    "open.ionic.sample.ios": "cd apps/ionic-sample && npm run cap.ios",
+    "open.ionic.sample.android": "cd apps/ionic-sample && npm run cap.android",
+    "sync.ionic.sample": "cd apps/ionic-sample && npm run cap.copy",
+    "start.ionic.sample": "cd apps/ionic-sample && npm start",
+    "clean.ionic.sample": "cd apps/ionic-sample && npx rimraf -- hooks node_modules platforms www plugins ios android package-lock.json && npm i && rimraf -- package-lock.json"
   },
   "private": true,
   "dependencies": {

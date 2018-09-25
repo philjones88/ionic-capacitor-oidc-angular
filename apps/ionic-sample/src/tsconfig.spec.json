@@ -1,0 +1,37 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/spec",
+    "module": "commonjs",
+    "types": [
+      "jasmine",
+      "node"
+    ],
+    "baseUrl": "./",
+    "paths": {
+        "@ionic-capacitor-oidc-angular/*": [
+          "../../../libs/*"
+        ],
+        "@ionic-capacitor-oidc-angular/ionic": [
+          "../../../xplat/ionic/index.ts"
+        ],
+        "@ionic-capacitor-oidc-angular/ionic/*": [
+          "../../../xplat/ionic/*"
+        ],
+        "@ionic-capacitor-oidc-angular/web": [
+          "../../../xplat/web/index.ts"
+        ],
+        "@ionic-capacitor-oidc-angular/web/*": [
+          "../../../xplat/web/*"
+        ]
+    }
+  },
+  "files": [
+    "test.ts"
+  ],
+  "include": [
+    "polyfills.ts",
+    "**/*.spec.ts",
+    "**/*.d.ts"
+  ]
+}
