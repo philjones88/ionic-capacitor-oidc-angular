@@ -1,0 +1,17 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "ionic-capacitor-oidc-angular",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "ionic-capacitor-oidc-angular",
+      "kebab-case"
+    ]
+  }
+}
