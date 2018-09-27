@@ -20,7 +20,7 @@ export class AngularRequestor extends Requestor {
         super();
     }
 
-    public async xhr<T>(settings: JQueryAjaxSettings): Promise<T> {
+    public async xhr<T>(settings: any): Promise<T> { // JQueryAjaxSettings causes reference issues
         this.logger.debug('AngularRequestor => xhr', settings);
 
         const { url, dataType, method, data } = settings;
