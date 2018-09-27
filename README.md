@@ -30,4 +30,10 @@ This is a sample Ionic app using the lib demonstrating the flow
 
 This is a sample Identity Server project that you can run locally to develop against.
 
-It has 1 user, `admin` with the password `password`
+It has 2 users, `bob` or `alice` with the password `password`
+
+The identity server sample was borrowed from:
+
+https://github.com/IdentityServer/IdentityServer4.Samples/tree/release/Quickstarts/7_JavaScriptClient/src/QuickstartIdentityServer
+
+The only real alterations were to the Config.cs to add an ionic client and to add CORS support.
