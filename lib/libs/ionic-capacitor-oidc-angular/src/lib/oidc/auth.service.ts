@@ -3,7 +3,6 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { Logger } from 'angularx-logger';
 import { Plugins } from '@capacitor/core';
 import { AngularRequestor } from './angular-requestor';
-import { CodeVerifier } from './code-verifier';
 import { Config } from './config';
 import { random } from './random';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -13,7 +12,8 @@ import {
     TokenRequest,
     BasicQueryStringUtils,
     GRANT_TYPE_AUTHORIZATION_CODE,
-    GRANT_TYPE_REFRESH_TOKEN
+    GRANT_TYPE_REFRESH_TOKEN,
+    DefaultCrypto
 } from '@openid/appauth';
 
 const { App, Browser, Storage } = Plugins;
@@ -135,15 +135,15 @@ export class AuthService {
 
         const handler = new BaseTokenRequestHandler(this.angularRequestor);
 
-        const request = new TokenRequest(
-            this.config.clientId,
-            this.config.redirectUri,
-            GRANT_TYPE_REFRESH_TOKEN,
-            undefined,
-            this.refreshToken,
-            {
+        const request = new TokenRequest({
+            client_id: this.config.clientId,
+            redirect_uri: this.config.redirectUri,
+            grant_type: GRANT_TYPE_REFRESH_TOKEN,
+            refresh_token: this.refreshToken,
+            extras: {
                 'code_verifier': this.codeVerifier
-            });
+            }
+        });
 
         const tokenRequestResult = await handler.performTokenRequest(this.authConfig, request);
 
@@ -240,18 +240,21 @@ export class AuthService {
     }
 
     private async generatePKCE(): Promise<void> {
-        const codeVerifier = new CodeVerifier();
+        const crypto = new DefaultCrypto();
+        const method = 'S256';
+        const codeVerifier = await crypto.generateRandom(128);
+        const challenge = await crypto.deriveChallenge(codeVerifier);
 
-        this.logger.debug('startAuth => generatePKCE', codeVerifier.verifier, codeVerifier.challenge, codeVerifier.method);
+        this.logger.debug('startAuth => generatePKCE', codeVerifier, challenge, method);
 
-        await Storage.set({ key: this.STORAGE_PKCE_CHALLENGE, value: codeVerifier.challenge });
-        this.codeChallenge = codeVerifier.challenge;
+        await Storage.set({ key: this.STORAGE_PKCE_CHALLENGE, value: challenge });
+        this.codeChallenge = challenge;
 
-        await Storage.set({ key: this.STORAGE_PKCE_METHOD, value: codeVerifier.method });
-        this.codeMethod = codeVerifier.method;
+        await Storage.set({ key: this.STORAGE_PKCE_METHOD, value: method });
+        this.codeMethod = method;
 
-        await Storage.set({ key: this.STORAGE_PKCE_VERIFIER, value: codeVerifier.verifier });
-        this.codeVerifier = codeVerifier.verifier;
+        await Storage.set({ key: this.STORAGE_PKCE_VERIFIER, value: codeVerifier });
+        this.codeVerifier = codeVerifier;
     }
 
     private async fetchAuthConfig(): Promise<void> {
@@ -302,15 +305,15 @@ export class AuthService {
 
         const handler = new BaseTokenRequestHandler(this.angularRequestor);
 
-        const request = new TokenRequest(
-            this.config.clientId,
-            this.config.redirectUri,
-            GRANT_TYPE_AUTHORIZATION_CODE,
-            this.authorizationCode,
-            undefined,
-            {
+        const request = new TokenRequest({
+            client_id: this.config.clientId,
+            redirect_uri: this.config.redirectUri,
+            grant_type: GRANT_TYPE_AUTHORIZATION_CODE,
+            code: this.authorizationCode,
+            extras: {
                 'code_verifier': this.codeVerifier
-            });
+            }
+        });
 
         const tokenRequestResult = await handler.performTokenRequest(this.authConfig, request);
 
