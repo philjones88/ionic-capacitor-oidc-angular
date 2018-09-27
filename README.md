@@ -37,3 +37,15 @@ The identity server sample was borrowed from:
 https://github.com/IdentityServer/IdentityServer4.Samples/tree/release/Quickstarts/7_JavaScriptClient/src/QuickstartIdentityServer
 
 The only real alterations were to the Config.cs to add an ionic client and to add CORS support.
+
+To run the sample, you will need .net core installed.
+
+Then simply:
+
+`dotnet restore`
+
+and
+
+`dotnet run`
+
+This will start an identity server running locally on localhost:5000
