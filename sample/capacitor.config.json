@@ -1,0 +1,6 @@
+{
+  "appId": "com.oidcsample.app",
+  "appName": "oidc-sample",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}
