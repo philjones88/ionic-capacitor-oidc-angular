@@ -1,12 +1,29 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      OpenID Connect
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+
+  <div *ngIf="isAuthenticated && !isExpired">
+      <p>You are now logged in!</p>
+
+      <p>User details:</p>
+    
+      <p>{{ user | json }}</p>
+
+      <ion-button (click)="fetchUserInfo()">Fetch User Info</ion-button>
+
+      <ion-button (click)="logout()">Logout</ion-button>
+  </div>
+
+  <div *ngIf="!isAuthenticated || isExpired">
+    <p>You are not logged in</p>
+
+    <ion-button (click)="login()">Login</ion-button>
+  </div>
+  
 </ion-content>

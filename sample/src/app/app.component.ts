@@ -50,8 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.logger.debug('AppComponent => already logged in, expired token');
       await this.authService.fetchNewAccessToken();
     } else {
-      this.logger.debug('AppComponent => not logged in or expired');
-      await this.authService.startAuthentication();
+      this.logger.debug('AppCOmponent => not logged in');
     }
 
   }
