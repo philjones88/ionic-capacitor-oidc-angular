@@ -167,6 +167,39 @@ export class AuthService {
         this.issuedAt = issuedAt;
     }
 
+    public async logout(): Promise<void> {
+        // Logout/revoking tokens currently doesn't seem to be implemented in @openid/appauth
+        // See: https://github.com/openid/AppAuth-JS/issues/52
+        // So maybe just clear everything for now?
+        
+        await Storage.remove({ key: this.STORAGE_ACCESS_TOKEN });
+        await Storage.remove({ key: this.STORAGE_REFRESH_TOKEN });
+        await Storage.remove({ key: this.STORAGE_ID_TOKEN });
+        await Storage.remove({ key: this.STORAGE_EXPIRES_IN });
+        await Storage.remove({ key: this.STORAGE_ISSUED_AT });
+
+        await Storage.remove({ key: this.STORAGE_NONCE });
+
+        await Storage.remove({ key: this.STORAGE_PKCE_CHALLENGE });
+        await Storage.remove({ key: this.STORAGE_PKCE_METHOD });
+        await Storage.remove({ key: this.STORAGE_PKCE_VERIFIER });
+
+        this.authorizationCode = null;
+        this.accessToken = null;
+        this.idToken = null;
+        this.refreshToken = null;
+        this.expiresIn = null;
+        this.issuedAt = null;
+    
+        this.nonce = null;
+
+        this.codeChallenge = null;
+        this.codeMethod = null;
+        this.codeVerifier = null;
+
+        this.userSubject.next(null);
+    }
+
     private async repopulateFromStorage(): Promise<void> {
         this.logger.debug('AuthService => repopulateFromStorage');
 
