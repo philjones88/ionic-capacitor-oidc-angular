@@ -25,6 +25,12 @@ This is where the logic exists to perform the code authorization flow.
 
 This is a sample Ionic app using the lib demonstrating the flow
 
+![Not Logged In](/docs/screenshots/logged-out.png)
+
+![Identity Server Login](/docs/screenshots/identity-server-login.png)
+
+![Logged In](/docs/screenshots/logged-in.png)
+
 ### idsrv
 
 This is a sample Identity Server project that you can run locally to develop against.
