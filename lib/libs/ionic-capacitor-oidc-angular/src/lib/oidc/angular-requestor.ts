@@ -40,7 +40,7 @@ export class AngularRequestor extends Requestor {
             response = this.httpClient.get<T>(url, options).toPromise();
         }
 
-        const result = await response
+        return response
             .then((resp) => {
                 this.logger.debug('AngularRequestor => xhr => result', resp);
                 return resp;
@@ -49,7 +49,5 @@ export class AngularRequestor extends Requestor {
                 this.logger.error('AngularRequestor => xhr => error', err);
                 return { } as T;
             });
-
-        return result;
     }
 }
