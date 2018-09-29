@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Logger } from 'angularx-logger';
 import { Plugins } from '@capacitor/core';
@@ -198,6 +199,21 @@ export class AuthService {
         this.codeVerifier = null;
 
         this.userSubject.next(null);
+    }
+
+    public async fetchUserInfo(): Promise<any> {
+        this.logger.debug('AuthService => fetchUserInfo');
+        return await this.angularRequestor.xhr<any>({
+            url: this.authConfig.userInfoEndpoint,
+            dataType: 'application/json',
+            headers: new HttpHeaders({ 'Authorization': this.getAuthorizationHeader() })
+        })
+    }
+
+    public getAuthorizationHeader(): string {
+        this.logger.debug('AuthService => getAuthorizationHeader');
+        // TODO: maybe validate the access token is set and valid
+        return `Bearer ${this.accessToken}`;
     }
 
     private async repopulateFromStorage(): Promise<void> {
