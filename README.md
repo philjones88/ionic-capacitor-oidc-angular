@@ -8,9 +8,8 @@ The aim is to be able to perform the full OpenID Connect Code Authorization flow
 
 ## TODO
 
-- [ ] lib
-- [ ] ionic sample
-- [ ] identity server sample
+- [ ] Add better logout suppot (AppAuth doesn't implement this at the moment)
+- [ ] Get profile claims working, only shows name/website currently
 
 ## Structure
 
