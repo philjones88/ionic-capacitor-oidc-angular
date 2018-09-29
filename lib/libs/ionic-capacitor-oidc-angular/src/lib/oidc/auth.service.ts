@@ -4,7 +4,6 @@ import { Logger } from 'angularx-logger';
 import { Plugins } from '@capacitor/core';
 import { AngularRequestor } from './angular-requestor';
 import { Config } from './config';
-import { random } from './random';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {
     AuthorizationServiceConfiguration,
@@ -233,7 +232,8 @@ export class AuthService {
     private async generateNonce(): Promise<void> {
         // Generate and store the nonce as per
         // https://auth0.com/docs/api-auth/tutorials/nonce
-        const nonce = random();
+        const crypto = new DefaultCrypto();
+        const nonce = await crypto.generateRandom(128);
         this.logger.debug('startAuth => generateNonce => nonce', nonce);
         await Storage.set({ key: this.STORAGE_NONCE, value: nonce });
         this.nonce = nonce;
